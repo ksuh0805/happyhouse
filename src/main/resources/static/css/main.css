@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+
+
+.main-home {
+    height: 100px;
+    line-height: 100px;
+    font-size: 30px;
+}
+.my-custom-scrollbar {
+    text-align: center;
+    position: relative;
+    height: 500px;
+    overflow: auto;
+    display: block;
+}
+
+.footer {
+  clear: both;
+  margin: 10px auto;
+  padding: 10px;
+  max-width: 1200px;
+  height: 70px;
+}
+
+.footer > ul {
+  float: right;
+}
+
+.footer > ul > li {
+  display: inline-block;
+  margin-right: 10px;
+  height: 50px;
+  line-height: 50px;
+  font-size: 12px;
+  color: darkgray;
+}
