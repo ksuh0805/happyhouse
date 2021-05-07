@@ -1,4 +1,4 @@
-package com.ssafy.happyhouse.model;
+package com.ssafy.happyhouse.model.dto;
 
 
 //환경점검 

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.happyhouse.model.mapper.AptDealMapper">
+
+	<select id="selectAll" resultType="aptdeal">
+		select * 
+		  from housedeal
+	</select>
+	
+	<select id="selectByDongCnt" parameterType="string" resultType="int">
+		select count(*) 
+		  from housedeal
+		 where dong = #{dong}
+	</select>
+	
+	<select id="selectByAptCnt" parameterType="string" resultType="int">
+		select count(*) 
+		  from housedeal
+		 where aptname like concat('%', #{apt}, '%')
+	</select>
+	
+	<select id="listByDong" parameterType="map" resultType="aptdeal">
+		select * 
+		  from housedeal
+		 where dong = #{dong}
+		 limit #{begin}, #{size}
+	</select>
+	<select id="listByApt" parameterType="map" resultType="aptdeal">
+		select * 
+		  from housedeal
+		 where aptname like concat('%', #{apt}, '%')
+		 limit #{begin}, #{size}
+	</select>
+</mapper>

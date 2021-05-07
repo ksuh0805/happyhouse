@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.happyhouse.model.mapper.BoardMapper">
+
+	<insert id="insert" parameterType="board">
+		insert into board(
+			subject, content
+		) values (
+			#{subject}, #{content}, now()
+		)
+	</insert>
+	<update id="update" parameterType="board">
+		update board
+		   set subject = #{subject},
+		       content = #{content}
+		 where idx = #{idx}
+	</update>
+	<delete id="delete" parameterType="int">
+		delete 
+		  from board
+		 where idx = #{idx} 
+	</delete>
+
+	<select id="selectAll" parameterType="page" resultType="board">
+		select * 
+		  from board
+		  limit #{begin}, #{listSize}
+	</select>
+	
+	<select id="selectBoard" parameterType="int" resultType="board">
+		select * 
+		  from board
+		 where idx = #{idx}
+	</select>
+	
+	<select id="countBoard" resultType="int">
+		select count(*)
+		  from board
+	</select>
+</mapper>

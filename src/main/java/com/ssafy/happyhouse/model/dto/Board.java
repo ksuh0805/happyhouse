@@ -1,4 +1,4 @@
-package com.ssafy.happyhouse.model;
+package com.ssafy.happyhouse.model.dto;
 
 public class Board {
     private int idx;
@@ -32,11 +32,11 @@ public class Board {
     public void setContent(String content) {
         this.content = content;
     }
-    public int getCount() {
-        return count;
-    }
-    public void setCount(int count) {
-        this.count = count;
-    }
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
 
 }

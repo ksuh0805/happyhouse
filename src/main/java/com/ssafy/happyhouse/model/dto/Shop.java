@@ -1,4 +1,4 @@
-package com.ssafy.happyhouse.model;
+package com.ssafy.happyhouse.model.dto;
 
 public class Shop {
 	String shopNo, shopName, shopClass, shopSido, shopDong, shopGungu, shopAddress, shopPostalCode;

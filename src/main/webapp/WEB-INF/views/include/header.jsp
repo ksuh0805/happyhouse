@@ -44,7 +44,7 @@
 					<span class="badge badge-light"></span>
 				</div>
 			</div>
-			<a href="${root}/index.jsp"><img src="${root}/img/ssafy_logo.png"></a> Don't worry, Be
+			<a href="${root}/main"><img src="${root}/img/ssafy_logo.png"></a> Don't worry, Be
 			SSAFY House
 
 		</div>
