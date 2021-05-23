@@ -1,67 +1,87 @@
 package com.ssafy.happyhouse.model.dto;
 
 public class Member {
-	String userId;
-	String userPwd;
-	String userName;
-	int userPhone;
-	String userAdd;
-	String user;
-	
-	public String getUserId() {
-		return userId;
+	private String userid;
+	private String username;
+	private String userpwd;
+	private String email;
+	private String address;
+	private String joindate;
+	private int age;
+	private String gender;
+	private String job;
+
+	public String getUserid() {
+		return userid;
 	}
-	public void setUserId(String userId) {
-		this.userId = userId;
+
+	public void setUserid(String userid) {
+		this.userid = userid;
 	}
-	public String getUserPwd() {
-		return userPwd;
+
+	public String getUsername() {
+		return username;
 	}
-	public void setUserPwd(String userPwd) {
-		this.userPwd = userPwd;
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
-	public String getUserName() {
-		return userName;
+
+	public String getUserpwd() {
+		return userpwd;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+
+	public void setUserpwd(String userpwd) {
+		this.userpwd = userpwd;
 	}
-	public int getUserPhone() {
-		return userPhone;
+
+	public String getEmail() {
+		return email;
 	}
-	public void setUserPhone(int userPhone) {
-		this.userPhone = userPhone;
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
-	public String getUserAdd() {
-		return userAdd;
+
+	public String getAddress() {
+		return address;
 	}
-	public void setUserAdd(String userAdd) {
-		this.userAdd = userAdd;
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
-	public String getUser() {
-		return user;
+
+	public String getJoindate() {
+		return joindate;
 	}
-	public void setUser(String user) {
-		this.user = user;
+
+	public void setJoindate(String joindate) {
+		this.joindate = joindate;
 	}
-	
-	public Member(String userId, String userPwd, String userName, int userPhone, String userAdd, String user) {
-		this.userId = userId;
-		this.userPwd = userPwd;
-		this.userName = userName;
-		this.userPhone = userPhone;
-		this.userAdd = userAdd;
-		this.user = user;
+
+	public int getAge() {
+		return age;
 	}
-	
-	public Member() {
+
+	public void setAge(int age) {
+		this.age = age;
 	}
-	
-	public Member(String userId, String userPwd, String userName, int userPhone, String userAdd) {
-		this.userId = userId;
-		this.userPwd = userPwd;
-		this.userName = userName;
-		this.userPhone = userPhone;
-		this.userAdd = userAdd;
+
+	public String getGender() {
+		return gender;
 	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public String getJob() {
+		return job;
+	}
+
+	public void setJob(String job) {
+		this.job = job;
+	}
+
+
 }

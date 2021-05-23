@@ -8,6 +8,25 @@
 		select * 
 		  from housedeal
 	</select>
+	<select id="guList" resultType="string">
+		select distinct gugun
+		  from dongcode
+	</select>
+	<select id="dongList" parameterType="string" resultType="string">
+		select distinct dong
+		  from dongcode
+		  where gugun = #{gu}
+	</select>
+	<select id="dongmarkerlist" parameterType="string" resultType="aptinfo">
+		select *
+		  from houseinfo
+		  where dong like #{dong}
+	</select>
+	<select id="aptmarkerlist" parameterType="string" resultType="aptinfo">
+		select *
+		  from houseinfo
+		  where aptname like concat('%', #{apt}, '%')
+	</select>
 	
 	<select id="selectByDongCnt" parameterType="string" resultType="int">
 		select count(*) 

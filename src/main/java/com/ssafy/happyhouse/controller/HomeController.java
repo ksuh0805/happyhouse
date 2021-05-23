@@ -1,13 +1,45 @@
 package com.ssafy.happyhouse.controller;
 
+import java.sql.SQLException;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.ssafy.happyhouse.model.dto.Page;
+import com.ssafy.happyhouse.model.service.BoardService;
 
 @Controller
 public class HomeController {
 	
-	@GetMapping(value = {"/", "/main"})
-	public String home() {
-		return "main";
+	@Autowired
+	BoardService boardService;
+	
+	
+	@GetMapping("/")
+	public String home(Model model, @RequestParam(value="pageNo", required=false, defaultValue="1") String pageNo) throws SQLException {
+		Page page = new Page(1, 10);
+		page.setPageNo(Integer.parseInt(pageNo));
+		model.addAttribute("result", boardService.boardList(page));
+		return "index";
 	}
+	
+	@GetMapping("chatPage")
+	public String chatPage() throws SQLException {
+		return "/chatPage";
+	}
+	
+	@GetMapping("chartPage")
+	public String chartPage() throws SQLException {
+		return "/chart/chart";
+	}
+	
+	
+	 @RequestMapping("/chatPage") public ModelAndView chat() { ModelAndView mv =
+	 new ModelAndView("chat"); return mv; }
+	 
 }

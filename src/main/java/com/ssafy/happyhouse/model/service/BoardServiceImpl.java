@@ -33,6 +33,11 @@ public class BoardServiceImpl implements BoardService {
 	public void boardUpdate(Board board) {
 		mapper.update(board);
 	}
+	
+	@Override
+	public void boardCount(Board board) {
+		mapper.countup(board);
+	}
 
 	@Override
 	public Board boardSelect(int idx) {
@@ -52,6 +57,11 @@ public class BoardServiceImpl implements BoardService {
 		result.put("pageResult", prd);
 		
 		return result;
+	}
+
+	@Override
+	public List<Board> boardAllList() {
+		return mapper.selectAllList();
 	}
 	
 }

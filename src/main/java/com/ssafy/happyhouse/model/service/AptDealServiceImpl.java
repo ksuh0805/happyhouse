@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssafy.happyhouse.model.dto.AptDeal;
+import com.ssafy.happyhouse.model.dto.AptInfo;
 import com.ssafy.happyhouse.model.dto.Page;
 import com.ssafy.happyhouse.model.dto.PageResult;
 import com.ssafy.happyhouse.model.mapper.AptDealMapper;
@@ -48,13 +49,33 @@ public class AptDealServiceImpl implements AptDealService {
 		map.put("size", page.getListSize());
 		List<AptDeal> list = mapper.listByApt(map);
 		int count = mapper.selectByAptCnt(apt);
-		PageResult prd = new PageResult(page.getPageNo(), count, 10);
+		PageResult prd = new PageResult(page.getPageNo(), count, 3);
 		
 		Map<String, Object> result = new HashMap<>();
 		result.put("searchlist", list);
 		result.put("pageResult", prd);
 		
 		return result;
+	}
+
+	@Override
+	public List<String> guList() {
+		return mapper.guList();
+	}
+
+	@Override
+	public List<String> dongList(String gu) {
+		return mapper.dongList(gu);
+	}
+
+	@Override
+	public List<AptInfo> dongmarkerlist(String dong) {
+		return mapper.dongmarkerlist(dong);
+	}
+
+	@Override
+	public List<AptInfo> aptmarkerlist(String apt) {
+		return mapper.aptmarkerlist(apt);
 	}
 
 }

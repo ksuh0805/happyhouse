@@ -6,7 +6,7 @@
 
 	<insert id="insert" parameterType="board">
 		insert into board(
-			subject, content
+			subject, content, wdate
 		) values (
 			#{subject}, #{content}, now()
 		)
@@ -26,7 +26,14 @@
 	<select id="selectAll" parameterType="page" resultType="board">
 		select * 
 		  from board
+		  order by wdate desc
 		  limit #{begin}, #{listSize}
+	</select>
+	
+	<select id="selectAllList" resultType="board">
+		select * 
+		  from board
+		  order by wdate desc
 	</select>
 	
 	<select id="selectBoard" parameterType="int" resultType="board">
@@ -39,4 +46,10 @@
 		select count(*)
 		  from board
 	</select>
+	
+	<update id="countup" parameterType="board">
+        update board
+           set count = #{count}+1
+         where idx = #{idx}
+    </update>
 </mapper>

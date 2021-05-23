@@ -23,4 +23,9 @@ import com.ssafy.happyhouse.model.dto.Page;
 	
 	// 게시글 수정
 	public void boardUpdate(Board board);
+	
+	// 조회수
+	public void boardCount(Board board);
+
+	public List<Board> boardAllList();
 }

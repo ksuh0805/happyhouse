@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.ssafy.happyhouse.model.dto.Page;
 import com.ssafy.happyhouse.model.service.AptDealService;
 
+import net.sf.json.JSONArray;
+
 @Controller
 @RequestMapping("/aptdeal")
 public class AptDealController {
@@ -19,8 +21,14 @@ public class AptDealController {
 	
 	@GetMapping(value = {"/", "/search"})
 	public String list(Model model) {
-		System.out.println("list");
-		//model.addAttribute("list", aptDealService.selectAll());
+		System.out.println("search");
+		model.addAttribute("gulist", aptDealService.guList());
+		return "/aptdeal/search";
+	}
+	@GetMapping(value = {"/searchgu"})
+	public String list(Model model, @RequestParam(value="gu") String gu) {
+		System.out.println("gu");
+		model.addAttribute("donglist", aptDealService.dongList(gu));
 		return "/aptdeal/search";
 	}
 	@RequestMapping("/searchbyapt")
@@ -29,19 +37,23 @@ public class AptDealController {
 		if(apt.equals("")) {
 			return "/aptdeal/search";
 		}
-		Page page = new Page(1, 10);
+		Page page = new Page(1, 3);
 		page.setPageNo(Integer.parseInt(pageNo));
 		model.addAttribute("result", aptDealService.listPageApt(page, apt));
 		model.addAttribute("apt", apt);
+		model.addAttribute("aptmarkerlistjson", JSONArray.fromObject(aptDealService.aptmarkerlist(apt)));
+		System.out.println(JSONArray.fromObject(aptDealService.aptmarkerlist(apt)));
 		return "/aptdeal/search";
 	}
 	@RequestMapping("/searchbydong")
 	public String listbydong(Model model, @RequestParam(value="dong") String dong, @RequestParam(value="pageNo", required=false, defaultValue="1") String pageNo) {
 		System.out.println(dong);
-		Page page = new Page(1, 10);
+		Page page = new Page(1, 3);
 		page.setPageNo(Integer.parseInt(pageNo));
 		model.addAttribute("result", aptDealService.listPageDong(page, dong));
 		model.addAttribute("dong", dong);
+		model.addAttribute("dongmarkerlistjson", JSONArray.fromObject(aptDealService.dongmarkerlist(dong)));
+		System.out.println(JSONArray.fromObject(aptDealService.dongmarkerlist(dong)));
 		return "/aptdeal/search";
 	}
 //	@GetMapping("/searchbydong")
