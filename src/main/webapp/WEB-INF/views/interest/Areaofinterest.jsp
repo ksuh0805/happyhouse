@@ -199,10 +199,11 @@ $(document).ready(function(){
 });
 </script>
 <body>
-	<div class="row" style="height: 100%">
+	<h1 style="text-align:center"><kbd>관심 목록 살펴보기</kbd></h1>
+	<div class="row">
 		<div class="col-md-4">
 			<div style="margin: 30px, 2%; padding: 10px;" id="interestpage">
-				<h2>관심 목록 검색</h2>
+				<h1>관심 목록 검색</h1>
 				<br>
 
 				<div class="justify-content-end form-inline" style="float: left;">
@@ -259,7 +260,7 @@ $(document).ready(function(){
 				<li id="CS2" data-order="5"><span class="category_bg store"></span>
 					편의점</li>
 			</ul>
-			<div id="map" style="width: 80%; height: 800px; margin: 40px"></div>
+			<div id="map" style="width: 80%; height: 600px; margin: 40px"></div>
 			<div class="map_wrap">
 				<div id="map" style="position: relative; overflow: hidden;"></div>
 			</div>

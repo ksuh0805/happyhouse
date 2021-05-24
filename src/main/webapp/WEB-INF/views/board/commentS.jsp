@@ -57,7 +57,7 @@ $('[name=commentInsertBtn]').click(function(){ //댓글 등록 버튼 클릭시
 	                a += '<button class="btn" style="color:skyblue" onclick="commentDelete('+value.cno+');"> 삭제 </button>';
                 }
 	           	a += '</div>';
-                a += '<div class="commentContent'+value.cno+'"> <p>'+value.content + '<code>  ' + value.reg_date + '</code>' +'</p>';
+                a += '<div class="commentContent'+value.cno+'"> <p>'+value.content + '<code>  ' + value.reg_date.substr(0, 10).replace(/-/g, '.') + '</code>' +'</p>';
                 a += '</div></div>';
             });
             

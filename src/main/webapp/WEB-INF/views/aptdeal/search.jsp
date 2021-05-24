@@ -69,29 +69,8 @@ $(document).ready(function(){
 </script>
 
 <body>
-
   <div class="container" id="searchp">
-    <!-- <div class="mt-3 md-3">
-      <h2>주거 유형</h2>
-      <div class="mb-3" style="border-bottom: 2px solid rgb(233, 232, 232);"></div>
-    </div>
-    <div class="row ">
-      <div class="col-md-2"><button class="btn btn-primary w-100 h-100"># 아파트</button></div>
-      <div class="col-md-2"><button class="btn btn-primary w-100 h-100"># 빌라, 투룸+</button></div>
-      <div class="col-md-2"><button class="btn btn-primary w-100 h-100"># 오피스텔</button></div>
-      <div class="col-md-2"><button class="btn btn-primary w-100 h-100"># 사무실</button> </div>
-      <div class="col-md-2"><button class="btn btn-primary w-100 h-100"># 임시</button> </div>
-      <div class="col-md-2"><button class="btn btn-primary w-100 h-100"># 임시</button></div>
-    </div>
-    <div class="mt-3 md-3">
-      <h2>계약 형태</h2>
-      <div class="mb-3" style="border-bottom: 2px solid rgb(233, 232, 232);"></div>
-    </div>
-    <div class="row ">
-      <div class="col-md-2"><button class="btn btn-primary w-100 h-100"># 매매</button></div>
-      <div class="col-md-2"><button class="btn btn-primary w-100 h-100"># 전세</button></div>
-      <div class="col-md-2"><button class="btn btn-primary w-100 h-100"># 월세</button></div>
-    </div> -->
+   <h1 style="text-align:center"><kbd>실거래 정보 확인하기</kbd></h1>
     <div class="mt-3 md-3" id="searchpage">
       <h2>검색 형태</h2>
       <div class="mb-3" style="border-bottom: 2px solid rgb(233, 232, 232);"></div>

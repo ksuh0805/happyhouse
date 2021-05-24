@@ -12,20 +12,28 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <title>돈워리 비싸피 하우스</title>
 </head>
+<script>
+$(document).ready(function(){
+	
+	// Handler for .ready() called.
+    $('html, body').animate({
+        scrollTop: $('#writepage').offset().top
+    }, 'slow');
+});
+</script>
 <body>
 	
 	
 	<!-- 중앙 content -->
-	<div style="padding:10px auto">
-	<h1 class="ml-5" style="font-weight:bold; font-size:40px;">공지사항 작성</h1>
+	<div id="writepage" style="padding:10px auto">
+	<h1 class="ml-5" style="text-align:center; font-weight:bold; font-size:40px;"><kbd>공지사항 작성</kbd></h1>
 		<form id="writeform" method="post" action="${root}/board/write">
-			<div class="form-group" align="left">
-		<input type="hidden" class="form-control" id="idx" name="idx" value="1">
-				<label for="subject">제목:</label>
+			<div class="form-group" style="padding-left:50px; padding-right:50px">
+				<label for="subject"><kbd style="background-color:#fed136">제목</kbd></label>
 				<input type="text" class="form-control" id="subject" name="subject">
 			</div>
-			<div class="form-group" align="left">
-				<label for="content">내용:</label>
+			<div class="form-group" style="padding-left:50px; padding-right:50px">
+				<label for="content"><kbd style="background-color:#fed136">내용</kbd></label>
 				<textarea class="form-control" rows="15" id="content" name="content"></textarea>
 			</div>
 			<div class="container mt-4 mb-4" style="text-align: center;">

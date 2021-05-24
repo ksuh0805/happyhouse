@@ -65,7 +65,7 @@ public class BoardController {
 	}
 	@GetMapping("/board/mvmodify")
 	public String mvmodify(Model model, @RequestParam(value="idx") int idx) throws SQLException {
-		model.addAttribute("idx", idx);
+		model.addAttribute("board", boardService.boardSelect(idx));
 		return "/board/modifypage";
 	}
 	@GetMapping("/board/mvwrite")

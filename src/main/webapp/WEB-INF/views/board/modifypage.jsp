@@ -16,21 +16,15 @@
 <link rel="stylesheet" href="/HappyHouseBackEnd/css/main.css" />
 <title>돈워리 비싸피 하우스</title>
 </head>
-<!-- <script>
-$(document).ready(function() {
-	  $("#modifyBtn").click(function() {
-			if($("#subject").val() == "") {
-				alert("제목 입력!!!");
-				return;
-			} else if($("#content").val() == "") {
-				alert("내용 입력!!!");
-				return;
-			} else {
-				$("#modifyform").submit();
-			}
-		});
-	});
-</script> -->
+<script>
+$(document).ready(function(){
+	
+	// Handler for .ready() called.
+    $('html, body').animate({
+        scrollTop: $('#modifypage').offset().top
+    }, 'slow');
+});
+</script>
 <body>
 	
 
@@ -57,17 +51,18 @@ $(document).ready(function() {
 		    <button type="button" class="btn btn-primary" onclick="location.href='${root}/board/delete?idx=${board.idx}'">삭제</button>
 		</div>
 	</div> --%>
-	<div style="padding:10px auto">
-	<h1 class="ml-5" style="font-weight:bold; font-size:40px;">공지사항 수정</h1>
+	<div id="modifypage" style="padding:10px auto">
+	<h1 class="ml-5" style="text-align:center; font-weight:bold; font-size:40px;"><kbd>공지사항 수정</kbd></h1>
 		<form id="modifyform" method="post" action="${root}/board/modify">
-			<div class="form-group" align="left">
-		<input type="hidden" class="form-control" id="idx" name="idx" value="${idx}">
-				<label for="subject">제목:</label>
-				<input type="text" class="form-control" id="subject" name="subject">
+		<h5 style="padding-left:10px"><kbd style="background-color:gray">${board.idx}번 공지사항</kbd></h5>
+			<div class="form-group" style="padding-left:50px; padding-right:50px">
+				<input type="hidden" class="form-control" id="idx" name="idx" value="${board.idx}">
+				<label for="subject"><kbd style="background-color:#fed136">제목</kbd></label>
+				<input type="text" class="form-control" id="subject" name="subject" value="${board.subject}">
 			</div>
-			<div class="form-group" align="left">
-				<label for="content">내용:</label>
-				<textarea class="form-control" rows="15" id="content" name="content"></textarea>
+			<div class="form-group" style="padding-left:50px; padding-right:50px">
+				<label for="content"><kbd style="background-color:#fed136">내용</kbd></label>
+				<textarea class="form-control" rows="15" id="content" name="content">${board.content}</textarea>
 			</div>
 			<div class="container mt-4 mb-4" style="text-align: center;">
 			<button type="submit" id="modifyBtn" class="btn btn-primary">수정</button>

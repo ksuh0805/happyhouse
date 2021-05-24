@@ -23,9 +23,19 @@
 	type="text/JavaScript"></script>
 <title>Insert title here</title>
 </head>
+<script>
+$(document).ready(function(){
+	
+	// Handler for .ready() called.
+    $('html, body').animate({
+        scrollTop: $('#chartpage').offset().top
+    }, 'slow');
+});
+</script>
 <body>
+<h1 style="text-align:center"><kbd>실시간 관심 키워드 살펴보기</kbd></h1>
 	<!-- Nav tabs -->
-	<ul class="nav nav-tabs">
+	<ul class="nav nav-tabs" id="chartpage">
 		<li class="nav-item"><a class="nav-link active" data-toggle="tab"
 			href="#home">전체 사용자 관심 키워드</a></li>
 		<li class="nav-item"><a class="nav-link" data-toggle="tab"

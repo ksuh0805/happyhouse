@@ -12,6 +12,15 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <title>돈워리 비싸피 하우스</title>
 </head>
+<script>
+$(document).ready(function(){
+	
+	// Handler for .ready() called.
+    $('html, body').animate({
+        scrollTop: $('#detailpage').offset().top
+    }, 'slow');
+});
+</script>
 <body>
 	<!-- 중앙 content -->
 	<%-- <div class="container mt-4">
@@ -29,30 +38,33 @@
 		    <button type="button" class="btn btn-primary" onclick="location.href='${root}/board/delete?idx=${board.idx}'">삭제</button>
 		</div>
 	</div> --%>
-	<section class="page-section">
-	<div style="padding:10px auto">
-	<h1 class="ml-5" style="font-weight:bold; font-size:40px;">공지사항 상세 보기</h1>
+	<div id="detailpage"style="padding:10px auto; align:center">
+	<h1 class="ml-5" style="text-align:center; font-weight:bold; font-size:40px;"><kbd>공지사항 상세 보기</kbd></h1>
+		
 	<br>
 		<div style="justify-content: center" class="row">
 			<table class="thead-dark table-bordered table-striped" style="width:90%; height:500px; text-align:center; border-radius: 1em;">
-				<tr class="table-warning">
+				<tr class="table-dark" style="text-color:black">					
+					<th style="font-weight:bold" colspan='1'>제목</th>
 					<th colspan='6'>${board.subject}</th>
 				</tr>
 				<tr>
 					<td style="font-weight:bold">작성자</td>
-					<td colspan="3">관리자</td>
+					<td colspan="4">관리자</td>
 					<td style="font-weight:bold">조회수</td>
 					<td>${board.count}</td>
 				</tr>
-				<tr style="text-align:left; padding-left:10px">
-					<td rowspan="8" colspan="6">${board.content}</td>
+				<tr style="text-align:left;">
+					<td style="padding:50px" rowspan="8" colspan="7">${board.content}</td>
 				</tr>
 			</table>
 		</div>
 			
 			<div class="container mt-4 mb-4" style="text-align: center;">
-			<button type="button" id="modifyBtn" class="btn btn-primary" onclick="location.href='${root}/board/mvmodify?idx=${board.idx}'">수정</button>
-			<button type="button" class="btn btn-primary" onclick="location.href='${root}/board/delete?idx=${board.idx}'">삭제</button>
+			<c:if test="${userinfo.userid eq 'admin'}">
+				<button type="button" id="modifyBtn" class="btn btn-primary" onclick="location.href='${root}/board/mvmodify?idx=${board.idx}'">수정</button>
+				<button type="button" class="btn btn-primary" onclick="location.href='${root}/board/delete?idx=${board.idx}'">삭제</button>
+			</c:if>
 			</div>
 	</div>
 	
@@ -76,7 +88,6 @@
     <div class="container">
         <div style="margin-top:10px" class="commentList" ></div>
     </div>
-    </section>
  
 <!--                     추가                         -->
 <%@ include file="commentS.jsp" %>
