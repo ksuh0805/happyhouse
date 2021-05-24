@@ -29,23 +29,31 @@
 		    <button type="button" class="btn btn-primary" onclick="location.href='${root}/board/delete?idx=${board.idx}'">삭제</button>
 		</div>
 	</div> --%>
+	<section class="page-section">
 	<div style="padding:10px auto">
 	<h1 class="ml-5" style="font-weight:bold; font-size:40px;">공지사항 상세 보기</h1>
-		<form id="modifyform" method="post" action="${root}/board/modify">
-			<div class="form-group" align="left">
-		<input type="hidden" class="form-control" id="idx" name="idx" value="${idx}">
-				<label for="subject">제목:</label>
-				<input type="text" class="form-control" id="subject" name="subject" value="${board.subject}">
-			</div>
-			<div class="form-group" align="left">
-				<label for="content">내용:</label>
-				<textarea class="form-control" rows="15" id="content" name="content">${board.content}</textarea>
-			</div>
+	<br>
+		<div style="justify-content: center" class="row">
+			<table class="thead-dark table-bordered table-striped" style="width:90%; height:500px; text-align:center; border-radius: 1em;">
+				<tr class="table-warning">
+					<th colspan='6'>${board.subject}</th>
+				</tr>
+				<tr>
+					<td style="font-weight:bold">작성자</td>
+					<td colspan="3">관리자</td>
+					<td style="font-weight:bold">조회수</td>
+					<td>${board.count}</td>
+				</tr>
+				<tr style="text-align:left; padding-left:10px">
+					<td rowspan="8" colspan="6">${board.content}</td>
+				</tr>
+			</table>
+		</div>
+			
 			<div class="container mt-4 mb-4" style="text-align: center;">
 			<button type="button" id="modifyBtn" class="btn btn-primary" onclick="location.href='${root}/board/mvmodify?idx=${board.idx}'">수정</button>
 			<button type="button" class="btn btn-primary" onclick="location.href='${root}/board/delete?idx=${board.idx}'">삭제</button>
 			</div>
-		</form>
 	</div>
 	
 	<!-- 댓글 -->
@@ -68,10 +76,12 @@
     <div class="container">
         <div style="margin-top:10px" class="commentList" ></div>
     </div>
+    </section>
  
 <!--                     추가                         -->
 <%@ include file="commentS.jsp" %>
 
-
+<!-- Footer-->
+        <%@ include file="../include/footer.jsp" %>
 </body>
 </html>

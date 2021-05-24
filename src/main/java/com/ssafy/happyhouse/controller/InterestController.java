@@ -29,20 +29,27 @@ public class InterestController {
 	public String list(Model model, @ModelAttribute(value="userid")String userid) throws Exception {
 		model.addAttribute("list", interestService.selectAll(userid));
 		System.out.println("userid" + userid);
-		System.out.println(interestService.selectAll(userid));
 		return "/interest/Areaofinterest";
 	}
 	
 	@PostMapping("insert")
-	public String write(@ModelAttribute(value="word") String word,@ModelAttribute(value="userid") String userid) throws Exception {
-		interestService.interestInsert(word, userid);
-		return "redirect:/interest/";
+	public String write(Model model,@ModelAttribute(value="word") String word,@ModelAttribute(value="userid") String userid) throws Exception {
+		int result = interestService.wordCheck(word, userid);
+		System.out.println(result);
+		if(result==0) {
+			interestService.interestInsert(word, userid);			
+		}
+		else {
+			System.out.println("이미 즐겨찾기에 포함되어있습니다");
+		}
+		return "redirect:/interest/Areaofinterest?userid=" + userid;
 	}
 	
 	@GetMapping("delete")
-	public String delete(@RequestParam(value="word") String word) throws SQLException {
-		interestService.interestDelete(word);
-		return "redirect:/interest/";
+	public String delete(@RequestParam(value="word") String word,@ModelAttribute(value="userid") String userid) throws SQLException {
+		System.out.println("d" + userid);
+		interestService.interestDelete(word, userid);
+		return "redirect:/interest/Areaofinterest?userid=" + userid;
 	}
 	
 //	@GetMapping("detail")

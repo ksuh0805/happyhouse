@@ -3,16 +3,23 @@ window.onload = function(){
 // $('#infock').click(function(){
 // $(this).attr('data-toggle', "modal").attr('data-target', "#InfoCheckModal");
 // })
+	
 
+	
+	
+	
 	$('#logout').click(function(){
 		$(location).attr("href", "/logout");
 	});
 	$('#memmanagement').click(function(){
 		$(location).attr("href", "/user/list");
 	});
+	
 
     // data-toggle="modal" data-target="#LoginModal"
     $('#loginmodalbtn').click(function(){
+    	$("#userRegModal").remove();
+    	$("#LoginModal").remove();
         $('body').append(
           `  
           <script type="text/javascript">
@@ -69,66 +76,44 @@ window.onload = function(){
 
         $(this).attr('data-toggle', "modal").attr('data-target', "#LoginModal");
     });
-  
-    /*$('#infock').click(function(){
-    	$("#userVuewModal").remove();
-    	$('body').append(
-    			`  
-    			<!-- 회원 정보 모달 -->
-<div class="modal" id="userViewModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
+    
 
-      <!-- Modal Header -->
-      
-      <div class="modal-header">
-      
-        <h4 class="modal-title">회원정보</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-
-      <!-- Modal body -->
-      <div class="modal-body">
-       	<table class="table table-bordered">
-            <colgroup>
-                <col width="120">
-                <col width="*">
-                <col width="120">
-                <col width="*">
-            </colgroup>
-            <tbody>
-            <tr>
-                <th class="text-center">ID</th>
-                <td class="text-left" id="vid">${userinfo.userid}</td>
-                <th class="text-center">회원명</th>
-                <td class="text-left" id="vname">1</td>
-            </tr>
-            <tr>
-            	<th class="text-center">이메일</th>
-                <td class="text-left" id="vemail">email</td>
-                <th class="text-center">가입일</th>
-                <td class="text-left" id="vjoindate">joindate</td>
-            </tr>
-            <tr>
-                <th class="text-center">주소</th>
-                <td class="text-left" colspan="3" id="vaddress">address</td>
-            </tr>
-            </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-</div>`
-    	);
-    	
-    	$(this).attr('data-toggle', "modal").attr('data-target', "#userViewModal");
-    });*/
     
    $('#signupmodalbtn').click(function(){
+	   $("#userRegModal").remove();
+	   $("#LoginModal").remove();
     	$('body').append(
     			`
     			
     			<script>
+    			
+    			$('#duplicatecheck').click(function(){
+		console.log("aaaaaa")
+		id = $("#userid").val();
+    	
+    	$.ajax({
+    	    url: '/admin/ID_Check',
+    	    type: 'POST',
+    	    dataType: 'text', // 서버로부터 내가 받는 데이터의 타입
+    	    contentType : 'text/plain; charset=utf-8;',// 내가 서버로 보내는 데이터의 타입
+    	    data: id ,
+
+    	    success: function(data){
+    	         if(data == 0){
+    	         console.log("아이디 없음");
+    	         alert("사용하실 수 있는 아이디입니다.");
+    	         }else{
+    	         	console.log("아이디 있음");
+    	         	alert("중복된 아이디가 존재합니다.");
+    	         	$( 'input#userid' ).val("");
+    	         }
+    	    },
+    	    error: function (){        
+    	                      
+    	    }
+	});
+	});
+    			
     			$("#registerBtn").click(function() {
 	let registerinfo = JSON.stringify({
 		"username" : $("#username").val(), 
@@ -188,6 +173,9 @@ window.onload = function(){
 						<div class="form-group" align="left">
 							<label for="">아이디</label>
 							<input type="text" class="form-control" id="userid" name="userid" placeholder="">
+							
+    						<button id="duplicatecheck" type="button" ">중복체크</button>
+    			
 						</div>
 						<div class="form-group" align="left">
 							<label for="">비밀번호</label>
@@ -206,9 +194,7 @@ window.onload = function(){
 						        <option value="30">30대</option>
     							<option value="40">40대</option>
 				    			<option value="50">50대</option>
-				    			<option value="50">60대</option>
-				    			<option value="50">70대</option>
-				    			<option value="50">80대</option>
+				    			<option value="60">60대 이상</option>
 						      </select>
 						    </div>
 			    			<div class="col-auto my-1">
@@ -254,36 +240,36 @@ window.onload = function(){
       });
 
 
-//	$("#registerBtn").click(function() {
-//	let registerinfo = JSON.stringify({
-//		"username" : $("#username").val(), 
-//		"userid" : $("#userid").val(), 
-//		"userpwd" : $("#userpwd").val(), 
-//		"email" : $("#email").val(), 
-//		"address" : $("#address").val()
-//	  });
-//	$.ajax({
-//		url:'${root}/admin/user',  
-//		type:'POST',
-//		contentType:'application/json;charset=utf-8',
-//		dataType:'json',
-//		data: registerinfo,
-//		success:function(users) {
-//			$("#username").val('');
-//			$("#userid").val('');
-//			$("#userpwd").val('');
-//			$("#email").val('');
-//			$("#address").val('');
-//		 	/* $("#userRegModal").modal("hide"); */
-//			makeList(users);
-//		},
-//		error:function(xhr,status,msg){
-//			console.log("상태값 : " + status + " Http에러메시지 : "+msg);
-//		}
+// $("#registerBtn").click(function() {
+// let registerinfo = JSON.stringify({
+// "username" : $("#username").val(),
+// "userid" : $("#userid").val(),
+// "userpwd" : $("#userpwd").val(),
+// "email" : $("#email").val(),
+// "address" : $("#address").val()
+// });
+// $.ajax({
+// url:'${root}/admin/user',
+// type:'POST',
+// contentType:'application/json;charset=utf-8',
+// dataType:'json',
+// data: registerinfo,
+// success:function(users) {
+// $("#username").val('');
+// $("#userid").val('');
+// $("#userpwd").val('');
+// $("#email").val('');
+// $("#address").val('');
+// /* $("#userRegModal").modal("hide"); */
+// makeList(users);
+// },
+// error:function(xhr,status,msg){
+// console.log("상태값 : " + status + " Http에러메시지 : "+msg);
+// }
 //		
-//	});
-//	$(location).attr("href", "/");
-//});
+// });
+// $(location).attr("href", "/");
+// });
       
       
     // 테이블 클릭시 행번호 찍기

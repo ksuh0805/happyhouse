@@ -38,4 +38,10 @@
 		where userid = #{userid}
 	</delete>
 	
+	<select parameterType="String" id="Id_Check" resultType="int">
+		SELECT count(userid) 
+		FROM ssafy_member
+		where userid = #{userid}
+	</select>
+	
 </mapper>

@@ -25,6 +25,7 @@ public class HomeController {
 		Page page = new Page(1, 10);
 		page.setPageNo(Integer.parseInt(pageNo));
 		model.addAttribute("result", boardService.boardList(page));
+		model.addAttribute("top", boardService.boardTop());
 		return "index";
 	}
 	
@@ -35,7 +36,8 @@ public class HomeController {
 	
 	@GetMapping("chartPage")
 	public String chartPage() throws SQLException {
-		return "/chart/chart";
+		System.out.println("ch");
+		return "/chart/chart2";
 	}
 	
 	

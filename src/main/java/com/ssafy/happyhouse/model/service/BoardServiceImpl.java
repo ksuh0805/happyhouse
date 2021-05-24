@@ -63,5 +63,10 @@ public class BoardServiceImpl implements BoardService {
 	public List<Board> boardAllList() {
 		return mapper.selectAllList();
 	}
+
+	@Override
+	public Board boardTop() {
+		return mapper.selectTop();
+	}
 	
 }

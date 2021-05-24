@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.happyhouse.model.dto.Member;
@@ -57,7 +58,6 @@ public class AdminController {
 	
 	@PostMapping(value = "/user")
 	public ResponseEntity<List<Member>> userRegister(@RequestBody @ApiParam(value="회원한명의 정보") Member memberDto) {
-		System.out.println("reg");
 		int cnt = userService.userRegister(memberDto);
 		if(cnt != 0) {
 			List<Member> list = userService.userList();
@@ -92,6 +92,21 @@ public class AdminController {
 		userService.userDelete(userid);
 		List<Member> list = userService.userList();
 		return new ResponseEntity<List<Member>>(list, HttpStatus.OK);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/ID_Check", produces="text/plane")
+	public String ID_Check(@RequestBody String paramData) throws Exception {
+		//클라이언트가 보낸 ID값
+		String id = paramData.trim();
+		System.out.println(id);
+		int result = userService.Id_Check(id);
+		if(result != 0) {//결과 값이 있으면 아이디 존재	
+			return "-1";
+		} else {		//없으면 아이디 존재 X
+			System.out.println("null");
+			return "0";
+		}
 	}
 	
 }

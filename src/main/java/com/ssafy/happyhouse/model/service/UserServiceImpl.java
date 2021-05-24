@@ -51,4 +51,9 @@ public class UserServiceImpl implements UserService {
 	public int userDelete(String userid) {
 		return sqlSession.getMapper(UserMapper.class).userDelete(userid);
 	}
+	
+	@Override
+	public int Id_Check(String userid) { 
+		return sqlSession.getMapper(UserMapper.class).Id_Check(userid);
+	}
 }

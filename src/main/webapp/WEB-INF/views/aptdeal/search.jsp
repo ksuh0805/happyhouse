@@ -36,6 +36,11 @@ function searchbyapt() {
 	document.getElementById("searchbyapt").submit();
 }
 $(document).ready(function(){
+	
+	// Handler for .ready() called.
+    $('html, body').animate({
+        scrollTop: $('#searchpage').offset().top
+    }, 'slow');
 	 
     // 라디오버튼 클릭시 이벤트 발생
     $("input:radio[name=radio]").click(function(){
@@ -87,7 +92,7 @@ $(document).ready(function(){
       <div class="col-md-2"><button class="btn btn-primary w-100 h-100"># 전세</button></div>
       <div class="col-md-2"><button class="btn btn-primary w-100 h-100"># 월세</button></div>
     </div> -->
-    <div class="mt-3 md-3">
+    <div class="mt-3 md-3" id="searchpage">
       <h2>검색 형태</h2>
       <div class="mb-3" style="border-bottom: 2px solid rgb(233, 232, 232);"></div>
     </div>
@@ -174,6 +179,7 @@ $(document).ready(function(){
               value="${deal.aptname}" >
               <input class="form-control mr-sm-2" type="hidden" id="userid" name="userid"
               value="${userinfo.userid}" >
+              <span style="color:orange">관심 목록 &nbsp</span>
            <button class="btn btn-primary" id="AddInt">추가</button>
           </form>
           

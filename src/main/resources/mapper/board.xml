@@ -46,6 +46,12 @@
 		select count(*)
 		  from board
 	</select>
+	<select id="selectTop" resultType="board">
+		select *
+		  from board
+		  order by count desc
+		  limit 1;
+	</select>
 	
 	<update id="countup" parameterType="board">
         update board

@@ -14,4 +14,5 @@ public interface BoardMapper {
 	void update(Board board);
 	void countup(Board board);
 	int countBoard();
+	Board selectTop();
 }

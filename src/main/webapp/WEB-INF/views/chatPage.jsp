@@ -25,17 +25,24 @@
 	rel="stylesheet" type="text/css" />
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="${root}/css/styles.css" rel="stylesheet" />
+<script src="${root}/js/filtering.js"></script>
 </head>
 <body id="page-top">
 
 	
 	<script type="text/javascript">
+	
 	var ws;
 	function connectWs() {
 		ws = new WebSocket('ws://' + location.host + '/chat');
 		ws.onmessage = function(data) {
-			let today = new Date();   
-		
+			let today = new Date();
+			console.log(data.data);
+			var words = data.data.toString();
+			if(filter(words)) {
+				alert('사용할 수 없는 단어입니다!');
+				return;
+			}
 			let hours = today.getHours(); // 시
 			let minutes = today.getMinutes();  // 분
 			let seconds = today.getSeconds();  // 초
@@ -59,7 +66,7 @@
 	
 	<!-- Contact-->
 	<section class="page-section" id="contact">
-		<div class="container" style="align:center">
+		<div class="container" style="justify-content:center">
 			<div class="text-center">
 				<h2 class="section-heading text-uppercase">실시간 채팅</h2>
 				<h3 class="section-subheading text-muted">실시간으로 부동산 정보를 소통해보세요!</h3>
@@ -71,6 +78,9 @@
 			</div>
 		</div>
 	</section>
+	
+	 <!-- Footer-->
+        <%@ include file="./include/footer.jsp" %>
 	<!-- Team-->
 
 	<!-- Bootstrap core JS-->

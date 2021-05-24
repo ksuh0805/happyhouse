@@ -21,14 +21,6 @@
         <link href="${root}/css/styles.css" rel="stylesheet" />
     </head>
     <body id="page-top">
-        <!-- Masthead-->
-       <!-- <header class="masthead">
-            <div class="container">
-                <div class="masthead-subheading">Enjoy Our Service!</div>
-                <div class="masthead-heading text-uppercase">부동산 실거래 검색 페이지</div>
-                <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="#services">서비스 이용하기</a>
-            </div>
-        </header> -->
         
         <!-- Services-->
         <section class="page-section" id="services">
@@ -38,7 +30,7 @@
                     <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
                 </div>
                 <div class="row text-center">
-                    <div class="col-md-4" onclick="location.href='aptdeal/search'">
+                    <div class="col-md-4" onclick="location.href='aptdeal/search'" style="cursor:pointer">
                         <span class="fa-stack fa-4x">
                             <i class="fas fa-circle fa-stack-2x text-primary"></i>
                             <i class="fas fa-map-marked-alt fa-stack-1x fa-inverse"></i>
@@ -46,15 +38,18 @@
                         <h4 class="my-3">부동산 실거래 정보</h4>
                         <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
                     </div>
-                    <div class="col-md-4" onclick="location.href='interest/Areaofinterest'">
-                        <span class="fa-stack fa-4x">
-                            <i class="fas fa-circle fa-stack-2x text-primary"></i>
-                            <i class="fas fa-heart fa-stack-1x fa-inverse"></i>
-                        </span>
-                        <h4 class="my-3">나의 관심지역 살펴보기</h4>
-                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
-                    </div>
-                    <div class="col-md-4" onclick="location.href='${root}/chartPage'">
+                    <div class="col-md-4" style="cursor:pointer"
+	                    onclick="location.href='interest/Areaofinterest?userid=${userinfo.userid}'">
+	                    <span class="fa-stack fa-4x"> <i
+	                        class="fas fa-circle fa-stack-2x text-primary"></i> <i
+	                        class="fas fa-heart fa-stack-1x fa-inverse"></i>
+	                    </span>
+	                    <h4 class="my-3">나의 관심지역 살펴보기</h4>
+	                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur
+	                        adipisicing elit. Minima maxime quam architecto quo inventore
+	                        harum ex magni, dicta impedit.</p>
+	                </div>
+                    <div class="col-md-4" onclick="location.href='${root}/chart/chart'" style="cursor:pointer">
                         <span class="fa-stack fa-4x">
                             <i class="fas fa-circle fa-stack-2x text-primary"></i>
                             <i class="fas fa-search-dollar fa-stack-1x fa-inverse"></i>
@@ -76,8 +71,10 @@
 							목록</h1>
 						<i class="ml-5" style="font-size: 30px;">-총 게시글 ${pr.count}개</i>
 						<div class="ml-5">
-						<button class="btn btn-primary" onclick="location.href='${root}/board/mvwrite'">공지사항
-							글쓰기</button>
+						<c:if test="${userinfo.userid eq 'admin'}">
+							<button class="btn btn-primary" onclick="location.href='${root}/board/mvwrite'">공지사항
+								글쓰기</button>
+						</c:if>
 						</div>
 	
 						<table class="mt-5 table table-hover" style="font-size: 20px;">
@@ -90,9 +87,16 @@
 								</tr>
 							</thead>
 							<tbody>
+								<tr style="cursor:pointer" class="table-warning"
+									onclick="location.href='${root}/board/detail?idx=${top.idx}&count=${top.count}'">
+									<td style="width: 20%">인기! <i class="fa fa-fire-alt fa-lg"></i></td>
+									<td style="width: 30%">${top.subject}</td>
+									<td style="width: 30%">${top.wdate}</td>
+									<td style="width: 20%">${top.count}</td>
+								</tr>
 								<c:forEach var="board" items="${result.list}" varStatus="loop">
-									<tr
-										onclick="location.href='${root}/board/detail?idx=${board.idx}&&count=${board.count}'">
+									<tr style="cursor:pointer"
+										onclick="location.href='${root}/board/detail?idx=${board.idx}&count=${board.count}'">
 										<td style="width: 20%">${board.idx}</td>
 										<td style="width: 30%">${board.subject}</td>
 										<td style="width: 30%">${board.wdate}</td>
@@ -109,11 +113,11 @@
 	
 						<c:if test="${pr.count != 0}">
 							<nav style="width: 300px; margin: 0 auto;">
-								<ul class="mt-5 pagination pagination-lg">
+								<ul class="mt-5 pagination">
 									<li
 										class="page-item <c:if test="${not pr.prev}">disabled</c:if>">
 										<a class="page-link"
-										href="<c:if test="${pr.prev}">${root}/board/board?pageNo=${pr.beginPage - 1}</c:if>">Previous</a>
+										href="<c:if test="${pr.prev}">${root}/?pageNo=${pr.beginPage - 1}</c:if>">Previous</a>
 									</li>
 	
 									<c:forEach var="i" begin="${pr.beginPage}" end="${pr.endPage}">
@@ -124,14 +128,14 @@
 											</c:when>
 											<c:otherwise>
 												<li class="page-item"><a class="page-link"
-													href="${root}/board/board?pageNo=${i}">${i}</a></li>
+													href="${root}/?pageNo=${i}">${i}</a></li>
 											</c:otherwise>
 										</c:choose>
 									</c:forEach>
 									<li
 										class="page-item <c:if test="${not pr.next}">disabled</c:if>">
 										<a class="page-link"
-										href="<c:if test="${pr.next}">${root}/board/board?pageNo=${pr.endPage + 1}</c:if>">Next</a>
+										href="<c:if test="${pr.next}">${root}/?pageNo=${pr.endPage + 1}</c:if>">Next</a>
 									</li>
 								</ul>
 							</nav>
@@ -143,68 +147,7 @@
 			</div>
 			<div style="height: 70px;"></div>
 		</section>
-        <!-- About-->
-        <!-- <section class="page-section" id="about">
-            <div class="container">
-                <div class="text-center">
-                    <h2 class="section-heading text-uppercase">About</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
-                </div>
-                <ul class="timeline">
-                    <li>
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/img/about/1.jpg" alt="..." /></div>
-                        <div class="timeline-panel">
-                            <div class="timeline-heading">
-                                <h4>2009-2011</h4>
-                                <h4 class="subheading">Our Humble Beginnings</h4>
-                            </div>
-                            <div class="timeline-body"><p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p></div>
-                        </div>
-                    </li>
-                    <li class="timeline-inverted">
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/img/about/2.jpg" alt="..." /></div>
-                        <div class="timeline-panel">
-                            <div class="timeline-heading">
-                                <h4>March 2011</h4>
-                                <h4 class="subheading">An Agency is Born</h4>
-                            </div>
-                            <div class="timeline-body"><p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p></div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/img/about/3.jpg" alt="..." /></div>
-                        <div class="timeline-panel">
-                            <div class="timeline-heading">
-                                <h4>December 2015</h4>
-                                <h4 class="subheading">Transition to Full Service</h4>
-                            </div>
-                            <div class="timeline-body"><p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p></div>
-                        </div>
-                    </li>
-                    <li class="timeline-inverted">
-                        <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/img/about/4.jpg" alt="..." /></div>
-                        <div class="timeline-panel">
-                            <div class="timeline-heading">
-                                <h4>July 2020</h4>
-                                <h4 class="subheading">Phase Two Expansion</h4>
-                            </div>
-                            <div class="timeline-body"><p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</p></div>
-                        </div>
-                    </li>
-                    <li class="timeline-inverted">
-                        <div class="timeline-image">
-                            <h4>
-                                Be Part
-                                <br />
-                                Of Our
-                                <br />
-                                Story!
-                            </h4>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </section> -->
+        
         <!-- Contact-->
         <section class="page-section" id="contact">
 		<div class="container">
@@ -212,10 +155,9 @@
 				<h2 class="section-heading text-uppercase">실시간 채팅</h2>
 				<h3 class="section-subheading text-muted">실시간으로 부동산 정보를 소통해보세요!</h3>
 			</div>
-				<div class="row align-items-stretch mb-5">
+				<div class="row align-items-stretch mb-5" style="justify-content:center">
 					<div>
-						<!-- 여기에 채팅창 구현  -->
-
+						<i style="color:white" class="fa fa-comments fa-5x"></i>
 					</div>
 				</div>
 				<div class="text-center">
@@ -252,25 +194,7 @@
                 </div>
             </div>
         </section>
-        <!-- Clients-->
-        <div class="py-5">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-md-3 col-sm-6 my-3">
-                        <a href="#!"><img class="img-fluid img-brand d-block mx-auto" src="assets/img/logos/microsoft.svg" alt="..." /></a>
-                    </div>
-                    <div class="col-md-3 col-sm-6 my-3">
-                        <a href="#!"><img class="img-fluid img-brand d-block mx-auto" src="assets/img/logos/google.svg" alt="..." /></a>
-                    </div>
-                    <div class="col-md-3 col-sm-6 my-3">
-                        <a href="#!"><img class="img-fluid img-brand d-block mx-auto" src="assets/img/logos/facebook.svg" alt="..." /></a>
-                    </div>
-                    <div class="col-md-3 col-sm-6 my-3">
-                        <a href="#!"><img class="img-fluid img-brand d-block mx-auto" src="assets/img/logos/ibm.svg" alt="..." /></a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
         <!-- Footer-->
         <%@ include file="./include/footer.jsp" %>
         
@@ -280,9 +204,6 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Third party plugin JS-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
-        <!-- Contact form JS-->
-        <script src="assets/mail/jqBootstrapValidation.js"></script>
-        <script src="assets/mail/contact_me.js"></script>
         <!-- Core theme JS-->
         <script src="${root}/js/scripts.js"></script>
     </body>

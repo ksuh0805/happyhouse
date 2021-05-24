@@ -15,4 +15,5 @@ public interface UserService {
 	public int userRegister(Member memberDto);
 	public int userModify(Member memberDto);
 	public int userDelete(String userid);
+	public int Id_Check(String userid);
 }

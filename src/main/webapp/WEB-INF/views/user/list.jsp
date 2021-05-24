@@ -333,15 +333,8 @@
 
 
 
-	<div class="footer">
-		<ul>
-			<li>사이트소개</li>
-			<li>개인정보처리방침</li>
-			<li>이용약관</li>
-			<li>오시는길</li>
-		</ul>
-	</div>
-	<div class="footer"></div>
+	<!-- Footer-->
+        <%@ include file="../include/footer.jsp" %>
 
 
 

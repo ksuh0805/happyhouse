@@ -14,8 +14,9 @@
 	<delete id="interestDelete" parameterType="string">
 		delete 
 		  from interest
-		 where word = #{word} 
+		 where word = #{word} and userid = #{userid}
 	</delete>
+	
 	
 	<select id="interestList" parameterType="string" resultType="interestArea">
 		select * 
@@ -23,4 +24,48 @@
 		  where userid = #{userid}
 	</select>
 	
+	<select id="wordCheck" parameterType="string" resultType="int">
+		select count(word) 
+		from interest 
+		where word = #{word} and userid = #{userid}
+	</select>
+	
+	<select id="countCheck" resultType="Chart">
+        select word, count(word) countWord
+        from interest
+        group by word
+        order by countWord desc limit 5
+    </select>
+
+	<select id="countGender" parameterType="string" resultType="chart">
+		SELECT word, count(word) countWord
+		FROM interest
+		WHERE userid IN (SELECT userid FROM ssafy_member WHERE gender = #{gender})
+		GROUP BY word
+		order by countWord desc limit 5;
+	</select>
+	<select id="countAge" parameterType="int" resultType="chart">
+		SELECT word, count(word) countWord
+		FROM interest
+		WHERE userid IN (SELECT userid FROM ssafy_member WHERE age = #{age})
+		GROUP BY word
+		order by countWord desc limit 5;
+	</select>
+	<select id="countJob" parameterType="string" resultType="chart">
+		SELECT word, count(word) countWord
+		FROM interest
+		WHERE userid IN (SELECT userid FROM ssafy_member WHERE job = #{job})
+		GROUP BY word
+		order by countWord desc limit 5;
+	</select>
+
+	<select id="wordcloudlist" resultType="WordcloudDTO" parameterType="WordcloudDTO">
+        SELECT 
+            word, count(*) AS MOUNT 
+        FROM 
+            interest 
+        GROUP BY 
+            word 
+        HAVING count(*) >1
+	</select>	
 </mapper>

@@ -28,4 +28,6 @@ import com.ssafy.happyhouse.model.dto.Page;
 	public void boardCount(Board board);
 
 	public List<Board> boardAllList();
+
+	public Board boardTop();
 }

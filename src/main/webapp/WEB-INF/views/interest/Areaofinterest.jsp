@@ -189,11 +189,19 @@
 }
 </style>
 </head>
+<script>
+$(document).ready(function(){
+	
+	// Handler for .ready() called.
+    $('html, body').animate({
+        scrollTop: $('#interestpage').offset().top
+    }, 'slow');
+});
+</script>
 <body>
-
 	<div class="row" style="height: 100%">
 		<div class="col-md-4">
-			<div style="margin: 30px, 2%; padding: 10px;">
+			<div style="margin: 30px, 2%; padding: 10px;" id="interestpage">
 				<h2>관심 목록 검색</h2>
 				<br>
 
@@ -204,11 +212,12 @@
 						<input class="form-control mr-sm-2" type="text" id="word"
 							name="word">
 							<input type=hidden id="userid"
-							name="userid" value="${userinfo.userid}">
+							 name="userid" value="${userinfo.userid}">
 						<!-- <button class="btn btn-success bg-primary" id="SearchInt">Search</button> -->
 						<button class="btn btn-primary" id="AddInt">추가</button>
 					</form>
 				</div>
+
 				<br> <br>
 				<c:if test="${empty list}">
 					<tr>
@@ -475,11 +484,21 @@
 						el.className = 'on';
 					}
 				}
+				// 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
+				var mapTypeControl = new kakao.maps.MapTypeControl();
+
+				// 지도에 컨트롤을 추가해야 지도위에 표시됩니다
+				// kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
+				map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+
+				// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
+				var zoomControl = new kakao.maps.ZoomControl();
+				map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 			</script>
 
 		</div>
 	</div>
 
-
+<%@ include file="../include/footer.jsp"%>
 </body>
 </html>
