@@ -11,7 +11,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>공공칠방</title>
   <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -56,15 +56,25 @@ $(document).ready(function(){
             // radio 버튼의 value 값이 0이라면 비활성화
         }
     });
-    /* if("${apt}"){
-    	$("input[name=radio]:checked").val(0);
-    	jQuery('#searchbyapt').css("display", "block"); 
-        jQuery('#searchbydong').css("display", "none");
-    }else if("${dong}"){
-    	$("input[name=radio]:checked").val(1);
-    	jQuery('#searchbydong').css("display", "block");
-        jQuery('#searchbyapt').css("display", "none");
-    } */
+    
+        if(localStorage.selected) {
+          $('#' + localStorage.selected ).attr('checked', true);
+        }
+        $('.radiotabs').click(function(){
+          localStorage.setItem("selected", this.id);
+        });
+        
+        if($("input[name=radio]:checked").val() == "1"){
+            jQuery('#searchbydong').css("display", "block");
+            jQuery('#searchbyapt').css("display", "none");
+            // radio 버튼의 value 값이 1이라면 활성화
+ 
+        }else if($("input[name=radio]:checked").val() == "0"){
+              jQuery('#searchbyapt').css("display", "block"); 
+              jQuery('#searchbydong').css("display", "none"); 
+            // radio 버튼의 value 값이 0이라면 비활성화
+        }
+
 });
 </script>
 
@@ -77,45 +87,29 @@ $(document).ready(function(){
     </div>
     <div class="row" style="justify-content: left; ">
     <div class="col-2">
-    <input type="radio" id="dongradio" name="radio" value="1" checked="checked">
+    <input class="radiotabs" type="radio" id="dongradio" name="radio" value="1" checked="checked">
     <label for="dongradio">행정동으로 검색</label>
+    <br>
     </div>
     <div class="col-2">
-	<input type="radio" id="aptradio" name="radio" value="0">
+	<input class="radiotabs" type="radio" id="aptradio" name="radio" value="0">
 	<label for="aptradio">아파트로 검색</label>
 	</div>
     </div>
     <form id="searchbydong" method="post" action="${root}/aptdeal/searchbydong">
-    <div class="row mt-3" style=" justify-content: center;">
-      <div class="col-md-2">
-        <select class="form-control" name="sido1" id="sido1" style="font-size: 20px;"></select>
-      </div>
-      <div class="col-md-2">
-        <select class="form-control" name="dong" id="dong" style="font-size: 20px;">
-          <c:if test="${searchlist.size() != 0}">
-          <option selected>${dong} </option>
-          </c:if>
-          <option>동으로 검색 </option>
-          <option>사직동 </option>
-          <option>내수동 </option>
-          <option>견지동 </option>
-          <option>효제동 </option>
-          <option>명륜1가 </option>
-          <option>명륜2가 </option>
-          <option>창신동 </option>
-          <option>숭인동 </option>
-          <option>평창동 </option>
-          <option>익선동 </option>
-          <option>평동 </option>
-          <option>홍파동 </option>
-          <option>무악동 </option>
-          <option>인의동 </option>
-        </select>
+    <div class="row" style=" justify-content: center;">
+      <div class="col-md-4">
+        <select class="form-control" name="gu" id="gu" style="font-size: 20px;"></select>
+        <select class="form-control" name="dong" id="dong" style="font-size: 20px;"></select>
       </div>
       <div class="col-md-2">
         <button class="btn btn-primary w-100 h-100" onclick="javascript:searchbydong();">검색</button>
       </div>
     </div>
+		<c:if test="${!empty dong}">
+          	<h3 style="display:inline"><kbd>${gu}</kbd></h3>
+          	<h3 style="display:inline"><kbd>${dong}</kbd></h3>
+        </c:if>
     </form>
     <div align="center" style=" justify-content: center;">
     <form id="searchbyapt" style="display:none;"method="post" action="${root}/aptdeal/searchbyapt">
@@ -147,7 +141,7 @@ $(document).ready(function(){
 		      <div class="card">
 		        <div class="card-body text-center">
 		          <h5>${deal.aptname}</h5>
-		          <p class="card-text">실거래금액 : ${deal.dealamount}원</p>
+		          <p class="card-text">실거래금액 : ${deal.dealamount}만원</p>
 		          <p class="card-text">거래날짜 : ${deal.dealyear}.${deal.dealmonth}.${deal.dealday}</p>
 		          <p class="card-text">건축년 : ${deal.dealyear}년</p>
 		          <p class="card-text">면적 : ${deal.area} m^2</p>
@@ -168,7 +162,7 @@ $(document).ready(function(){
 			  	</c:forEach>
 		   </c:if>
 			<c:if test="${searchlist.size() == 0}">
-			  <h2>옵션을 선택해주세요</h2>
+			  <h2>거래 정보가 없습니다!</h2>
 			</c:if>
 		  <!-- pagenation -->
 		  <c:if test="${!empty dong}">
@@ -177,7 +171,7 @@ $(document).ready(function(){
 		               <ul class="mt-2 pagination" style="justify-content: center; ">
 					    <li class="page-item <c:if test="${not pr.prev}">disabled</c:if>">
 					    
-					    	<a class="page-link" href="<c:if test="${pr.prev}">${root}/aptdeal/searchbydong?dong=${dong}&pageNo=${pr.beginPage - 1}</c:if>">Previous</a></li>
+					    	<a class="page-link" href="<c:if test="${pr.prev}">${root}/aptdeal/searchbydong?dong=${dong}&pageNo=${pr.beginPage - 1}&gu=${gu}</c:if>">Previous</a></li>
 					    	
 					    <c:forEach var="i" begin="${pr.beginPage}" end="${pr.endPage}">	
 						    <c:choose>
@@ -185,12 +179,12 @@ $(document).ready(function(){
 								    <li class="page-item active"><a class="page-link" href="#1">${i}</a></li>
 							    </c:when>
 							    <c:otherwise>
-								    <li class="page-item"><a class="page-link" href="${root}/aptdeal/searchbydong?dong=${dong}&pageNo=${i}">${i}</a></li>
+								    <li class="page-item"><a class="page-link" href="${root}/aptdeal/searchbydong?dong=${dong}&pageNo=${i}&gu=${gu}">${i}</a></li>
 							    </c:otherwise>
 						    </c:choose>
 					    </c:forEach>
 					    <li class="page-item <c:if test="${not pr.next}">disabled</c:if>">
-					    	<a class="page-link" href="<c:if test="${pr.next}">${root}/aptdeal/searchbydong?dong=${dong}&pageNo=${pr.endPage + 1}</c:if>">Next</a></li>
+					    	<a class="page-link" href="<c:if test="${pr.next}">${root}/aptdeal/searchbydong?dong=${dong}&pageNo=${pr.endPage + 1}&gu=${gu}</c:if>">Next</a></li>
 				 		</ul>
 		            </nav>
 		        </c:if>
@@ -250,16 +244,22 @@ $(document).ready(function(){
 	map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 	
 	if('${dongmarkerlistjson}' != '') {
-		var arr = JSON.parse('${dongmarkerlistjson}');
-		console.log("dongmarker");
-		console.log(arr);
-		markerlist();
+		if('${dongmarkerlistjson}'.length > 2) {
+			console.log('${dongmarkerlistjson}');
+			console.log('${dongmarkerlistjson}'.length);
+			var arr = JSON.parse('${dongmarkerlistjson}');
+			console.log("dongmarker");
+			console.log(arr);
+			markerlist();			
+		}
 	}
 	if('${aptmarkerlistjson}' != '') {
-		var arr = JSON.parse('${aptmarkerlistjson}');
-		console.log("aptmarker");
-		console.log(arr);
-		markerlist();
+		if('$aptmarkerlistjson}'.length > 2) {
+			var arr = JSON.parse('${aptmarkerlistjson}');
+			console.log("aptmarker");
+			console.log(arr);
+			markerlist();
+		}
 	}
 	
 	function markerlist(){
@@ -296,19 +296,6 @@ $(document).ready(function(){
 
 	// 지도에 마커를 표시하는 함수입니다
 	function displayMarker(place) {
-	    // 마커를 생성하고 지도에 표시합니다
-	    /* var marker = new kakao.maps.Marker({
-	        map: map,
-	        position: new kakao.maps.LatLng(place.lat, place.lng)
-	    }); */
-	    /* // 마커에 클릭이벤트를 등록합니다
-	    var infowindow = new kakao.maps.InfoWindow({zIndex:1});
-	    kakao.maps.event.addListener(marker, 'click', function() {
-	        // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
-	        infowindow.setContent('<div style="padding:5px;font-size:12px;text-align:center;">' + place.name + '</div>');
-	        infowindow.open(map, marker);
-	    }); */
-//	    var imageSrc = 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.iconsdb.com%2Fred-icons%2Fhome-5-icon.html&psig=AOvVaw1lf9BMnHLwCmX0uAZWYZdu&ust=1621697074649000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCLihiciK2_ACFQAAAAAdAAAAABAT', // 마커이미지의 주소입니다    
 	    var imageSrc = '${root}/img/hmark2.png', // 마커이미지의 주소입니다    
 	    imageSize = new kakao.maps.Size(50, 53), // 마커이미지의 크기입니다
 	    imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.

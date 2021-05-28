@@ -20,8 +20,9 @@
 <script
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a554359b56c8d4da13f84d05262eb589&libraries=services"></script>
 <script src="${Root}/js/login.js"></script>
+<script src="${root}/js/mainhref.js"></script>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
-<title>돈워리 비싸피 하우스</title>
+<title>공공칠방</title>
 <style>
 .map_wrap, .map_wrap * {
 	margin: 0;
@@ -199,7 +200,7 @@ $(document).ready(function(){
 });
 </script>
 <body>
-	<h1 style="text-align:center"><kbd>관심 목록 살펴보기</kbd></h1>
+	<h1 style="text-align:center"><kbd>관심 목록과 주변 상권 살펴보기</kbd></h1>
 	<div class="row">
 		<div class="col-md-4">
 			<div style="margin: 30px, 2%; padding: 10px;" id="interestpage">
@@ -228,7 +229,7 @@ $(document).ready(function(){
 				<c:forEach var="interest" items="${list}" varStatus="loop">
 			<%-- 	<c:if test="${'${userinfo.userid}' eq '${interest.userid}'}"> --%>
 					<tr>
-						<a style="width: 20%"
+						<a style="width: 20%; cursor:pointer"
 							onclick="location.href='${root}/interest/detail?word=${interest.word}&&userid=${userinfo.userid}'">${interest.word}</a>
 						<button c:if="${interest.word}!=null"
 							onclick="location.href='${root}/interest/delete?word=${interest.word}&&userid=${userinfo.userid}'"

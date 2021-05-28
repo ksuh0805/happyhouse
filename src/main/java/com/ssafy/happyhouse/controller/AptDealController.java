@@ -22,13 +22,6 @@ public class AptDealController {
 	@GetMapping(value = {"/", "/search"})
 	public String list(Model model) {
 		System.out.println("search");
-		model.addAttribute("gulist", aptDealService.guList());
-		return "/aptdeal/search";
-	}
-	@GetMapping(value = {"/searchgu"})
-	public String list(Model model, @RequestParam(value="gu") String gu) {
-		System.out.println("gu");
-		model.addAttribute("donglist", aptDealService.dongList(gu));
 		return "/aptdeal/search";
 	}
 	@RequestMapping("/searchbyapt")
@@ -46,12 +39,14 @@ public class AptDealController {
 		return "/aptdeal/search";
 	}
 	@RequestMapping("/searchbydong")
-	public String listbydong(Model model, @RequestParam(value="dong") String dong, @RequestParam(value="pageNo", required=false, defaultValue="1") String pageNo) {
+	public String listbydong(Model model, @RequestParam(value="gu") String gu, @RequestParam(value="dong") String dong, @RequestParam(value="pageNo", required=false, defaultValue="1") String pageNo) {
 		System.out.println(dong);
 		Page page = new Page(1, 3);
 		page.setPageNo(Integer.parseInt(pageNo));
 		model.addAttribute("result", aptDealService.listPageDong(page, dong));
 		model.addAttribute("dong", dong);
+		model.addAttribute("gu", gu);
+		System.out.println("gu: " + gu);
 		model.addAttribute("dongmarkerlistjson", JSONArray.fromObject(aptDealService.dongmarkerlist(dong)));
 		System.out.println(JSONArray.fromObject(aptDealService.dongmarkerlist(dong)));
 		return "/aptdeal/search";

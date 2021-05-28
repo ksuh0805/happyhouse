@@ -10,7 +10,8 @@
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<title>돈워리 비싸피 하우스</title>
+<script src="${root}/js/mainhref.js"></script>
+<title>공공칠방</title>
 </head>
 <script>
 $(document).ready(function(){

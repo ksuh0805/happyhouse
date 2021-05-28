@@ -19,7 +19,8 @@
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 
 <link rel="stylesheet" href="${root}/css/main.css">
-<title>돈워리 비싸피 하우스</title>
+<script src="${root}/js/mainhref.js"></script>
+<title>공공칠방</title>
 	<script type="text/javascript">
 	$(document).ready(function() {
 		
@@ -212,8 +213,17 @@
 	}
 	</script>	
 </head>
+<script>
+$(document).ready(function(){
+	
+	// Handler for .ready() called.
+    $('html, body').animate({
+        scrollTop: $('#listpage').offset().top
+    }, 'slow');
+});
+</script>
 <body>
-<div class="container" align="center">
+<div class="container" align="center" id="listpage">
 	<h2>회원 목록</h2>
 	<div align="right"><button type="button" class="modiBtn btn btn-outline-info" data-toggle="modal" data-target="#userRegModal">등록</button></div>
   	<table class="table table-hover">

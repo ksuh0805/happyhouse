@@ -24,30 +24,243 @@
 				alert("${msg}");
 			</script>
 			<div>
-				<a class="nav-link js-scroll-trigger" id="loginmodalbtn">Login</a>
-				<a class="nav-link js-scroll-trigger" id="signupmodalbtn">SignUp</a>
+				<a class="nav-link js-scroll-trigger" style="cursor:pointer" id="loginmodalbtn">Login</a> <a
+					class="nav-link js-scroll-trigger" style="cursor:pointer" id="signupmodalbtn">SignUp</a>
 			</div>
 		</c:when>
 		<c:when test="${empty userinfo}">
 			<div class="btn-group">
-				<a style="color: white; padding: 5px;" id="loginmodalbtn">Login</a>
-				<a style="color: white; padding: 5px;" id="signupmodalbtn">SignUp</a>
+				<a style="color: white; padding: 5px; cursor:pointer" id="loginmodalbtn">Login</a>
+				<a style="color: white; padding: 5px; cursor:pointer" id="signupmodalbtn">SignUp</a>
 			</div>
 		</c:when>
 		<c:otherwise>
 			<div class="btn-group">
+				<a style="color: white; padding: 5px; cursor:pointer" id="sendMessage" data-toggle="modal" data-target="#sendMessageModal">
+					쪽지 <i style="color:white" class="fa fa-paper-plane fa-lg"></i>
+				</a>
+				
+				<a style="color: white; padding: 5px; cursor:pointer" id='listMessage'>
+					쪽지함 <i style="color:white" class="fa fa-envelope-square fa-lg"></i>
+				</a>
+				
 				<a style="color: white; padding: 5px;" type="button" id='infock'
-				data-toggle="modal" data-target="#userViewModal"
-				> My	Profile</a> <a style="color: white; padding: 5px;" type="button"
-					id="memmanagement">회원 관리</a> <a style="color: white; padding: 5px;"
-					type="button" id='logout'>Logout</a>
+					data-toggle="modal" data-target="#userViewModal"> My Profile</a>
+				<c:if test="${userinfo.userid == 'admin'}">
+                <a style="color: white; padding: 5px;" type="button" id="memmanagement">회원 관리</a>
+            </c:if>
+				<a style="color: white; padding: 5px;" type="button" id='logout'>Logout</a>
 			</div>
 		</c:otherwise>
 	</c:choose>
+
+
+	<script> 
 	
-	<script>
+	
+	// 메세지 상세
+	 function deleteMessage(idx){
+		 console.log("show");
+		 console.log(eval("no="+idx))
+		  $.ajax({
+	    	    url: '${root}/message/delete',
+	    	    type: 'GET',
+	    	    dataType: 'json', // 서버로부터 내가 받는 데이터의 타입
+	    	    data: 'no='+idx,			//여기에 뭘써야할까요......
+
+	    	    success: function(){
+	    	    	$("#userViewModal").remove();
+	    	    	$("#detailMessageModal").remove();
+		        	$("#sendMessageModal").remove();
+		        	$("#listMessageModal").remove();
+	    	    	
+	    	    },
+	    	    error: function (){        
+	    	                      
+	    	    }
+		}); 
+	 
+	}
+	    	    
+	
+	
+	 // 메세지 상세
+	 function showdetail(idx){
+		 console.log("show");
+		 console.log(eval("no="+idx))
+		  $.ajax({
+	    	    url: '${root}/message/detail',
+	    	    type: 'GET',
+	    	    dataType: 'json', // 서버로부터 내가 받는 데이터의 타입
+	    	    data: 'no='+idx,			//여기에 뭘써야할까요......
+
+	    	    success: function(data){
+	    	    	let msgDetail = data;
+	    	    	let ttbody = "";
+	    	    	
+	    			 ttbody += '<p> 보낸 사람 : '+msgDetail.sendID+'</p>'; 
+	    			 ttbody += '<p> 제목 : '+msgDetail.title+'</p>';
+	    			 ttbody += '<p> 내용 : '+msgDetail.contents+'</p>';
+	    			 ttbody += '<button id="deleteMessage" data-dismiss="modal" onclick="deleteMessage('+ msgDetail.no +');">삭제하기 </button>';
+	    	    	
+	    	    	$("#userViewModal").remove();
+	    	    	$("#detailMessageModal").remove();
+		        	$("#sendMessageModal").remove();
+		        	$("#listMessageModal").remove();
+		        	$('body').append(
+		        			`  
+		    <div class="modal" id="detailMessageModal"  >
+		      <div class="modal-dialog">
+		        <div class="modal-content">
+
+		          <!-- Modal Header -->
+		          <div class="modal-header">
+		            <h4 class="modal-title">상세 메세지</h4>
+		            <button type="button" class="close" data-dismiss="modal">&times;</button> 
+		          </div>
+
+		          <!-- Modal body -->
+		          <div class="modal-body">
+		    		<ttbody id="messageTbody"> `
+		    			+ttbody+
+		    			"</ttbody></div></div></div></div>" 
+		    			);
+		    		
+		    		$("#detailMessageModal").modal('show')
+		    		
+	    	    },
+	    	    error: function (){        
+	    	                      
+	    	    }
+		}); 
+	 
+	}
+	 // 메세지 상세
+	 /*$('body').on("click","#detailMessage",function(){
+		  $.ajax({
+	    	    url: '${root}/message/detail',
+	    	    type: 'GET',
+	    	    dataType: 'json', // 서버로부터 내가 받는 데이터의 타입
+	    	    data: "no=1",			//여기에 뭘써야할까요......
+
+	    	    success: function(data){
+	    	    	let msgDetail = data;
+	    	    	let ttbody = "";
+	    	    	
+	    			 ttbody += '<p> 보낸 사람 : '+msgDetail.sendID+'</p>';
+	    			 ttbody += '<p> 제목 : '+msgDetail.title+'</p>';
+	    			 ttbody += '<p> 내용 : '+msgDetail.contents+'</p>';
+	    	    	
+	    	    	$("#userViewModal").remove();
+	    	    	$("#detailMessageModal").remove();
+		        	$("#sendMessageModal").remove();
+		        	$("#listMessageModal").remove();
+		        	$('body').append(
+		        			`  
+		    <div class="modal" id="detailMessageModal"  >
+		      <div class="modal-dialog">
+		        <div class="modal-content">
+
+		          <!-- Modal Header -->
+		          <div class="modal-header">
+		            <h4 class="modal-title">상세 메세지</h4>
+		            <button type="button" class="close" data-dismiss="modal">&times;</button> 
+		          </div>
+
+		          <!-- Modal body -->
+		          <div class="modal-body">
+		    		<ttbody id="messageTbody"> `
+		    			+ttbody+
+		    			"</ttbody></div></div></div></div>" 
+		    			);
+		    		$("#detailMessageModal").modal('show')
+		    		
+	    	    },
+	    	    error: function (){        
+	    	                      
+	    	    }
+		}); 
+	 
+	});   */
+	
+	
+	// 메세지 목록 
+	 $('#listMessage').click(function(){ 
+		 $.ajax({
+	    	    url: '${root}/message/list',
+	    	    type: 'GET',
+	    	    dataType: 'json', // 서버로부터 내가 받는 데이터의 타입
+	    	    data: "userid=${userinfo.userid}",
+
+	    	    success: function(data){ 
+	    	    	let msgList = data;
+		    		 let tbody = "";
+		    		 for(let msg of msgList){ 
+		    			 /* tbody += '<tr style="cursor:pointer" id="detailMessage"  data-toggle="modal" data-target="#detailMessageModal"  >';	//onclick="location.href=${root}/message/detail?no='+msg.no+' " */ 
+		    			 tbody += '<tr style="cursor:pointer" id="detailMessage" data-dismiss="modal" onclick="showdetail('+ msg.no +');"  >';	//onclick="location.href=${root}/message/detail?no='+msg.no+' " 
+		    			 tbody += '<td style="width: 30%">'+msg.sendID+'</td>';
+		    			 tbody += '<td style="width: 35%">'+msg.title+'</td>';
+		    			 tbody += '<td style="width: 35%">'+msg.wdate+'</td>';
+		    			 tbody += '</tr>'; 
+		    		 }
+		    		 if(msgList.length == 0){
+		    			tbody = '<tr>';
+		    			tbody += '<td colspan="12" style="color: red;">메세지가 존재하지 않습니다.</td>'; 
+		    			tbody += '</tr>';
+		    		 }
+		    		 
+		    		 
+		    		 
+		        	$("#userVuewModal").remove();
+		        	$("#sendMessageModal").remove();
+		        	$("#listMessageModal").remove();
+		        	$("#detailMessageModal").remove();
+		        	$('body').append(
+		        			`  
+		        			<!-- 회원 정보 모달 -->
+		    <div class="modal" id="listMessageModal" >
+		      <div class="modal-dialog">
+		        <div class="modal-content">
+
+		          <!-- Modal Header -->
+		          <div class="modal-header">
+		            <h4 class="modal-title">메세지함</h4>
+		            <button type="button" class="close" data-dismiss="modal">&times;</button>
+		          </div>
+
+		          <!-- Modal body -->
+		          <div class="modal-body">
+		          <table class="mt-5 table table-hover" style="font-size: 20px;">
+		    		<thead>
+		    			<tr>
+		    				<th>보낸사람</th>
+		    				<th>제목</th>
+		    				<th>날짜</th>
+		    			</tr>
+		    		</thead>
+		    		
+		    		<tbody id="messageTbody"> `
+		    			+tbody+
+		    		
+		    			"</tbody></table></div></div></div></div>" 
+		    			);
+		    		$("#listMessageModal").modal('show')
+		    		
+	    	    },
+	    	    error: function (){        
+	    	                      
+	    	    }
+		});
+	
+	}); 
+	
+	
+	// 회원 정보
 $('#infock').click(function(){
-    	$("#userVuewModal").remove();
+	$("#userViewModal").remove();
+	$("#detailMessageModal").remove();
+	$("#sendMessageModal").remove();
+	$("#listMessageModal").remove();
     	$('body').append(
     			`  
     			<!-- 회원 정보 모달 -->
@@ -109,7 +322,57 @@ $('#infock').click(function(){
 `
 );
 });
+	
+
+
+$('#sendMessage').click(function(){
+	$("#userVuewModal").remove();
+	$("#sendMessageModal").remove();
+	$("#listMessageModal").remove();
+   	$('body').append(
+   			`  
+            <div class="modal fade" id="sendMessageModal">
+                  <div class="modal-dialog">
+                  <div class="modal-content">
+
+                  <!-- Modal Header -->
+                  <div class="modal-header">
+	       <h4 class="modal-title">메세지 보내기</h4>
+	       <button type="button" class="close" data-dismiss="modal">&times;</button>
+	     </div>
+  	                <!-- Modal body -->
+  	                <div class="modal-body">
+				      <form id="messageform" method="post" action="${root}/message/send">
+				      <div class="form-group">
+				      <input type="hidden" class="form-control" id="no" name="no" value="1">
+			     	      <input type="hidden" class="form-control" value="${userinfo.userid}" id="sendID" name="SendID">
+				          <label for="inputReceivingID">받는 ID :</label>
+				          <input type="text" class="form-control" id="receivingID" name="receivingID" >
+				      </div>
+		   			<div class="form-group">
+		   			<label for="inputTitle">제목 :</label>
+		   			<input type="text" class="form-control" id="title" name="title" >
+		   			</div>
+			      <div class="form-group">
+			          <label for="inputContents">내용 :</label>
+			          <textarea class="form-control" rows="15" id="contents" name="contents"></textarea>
+			      </div>
+			      <div class="form-group" align="center">
+   						<button type="submit" class="btn btn-primary" id="sendBtn">보내기</button>
+			      </div>
+		      </form>
+	     </div>
+              </div>
+          </div>
+          </div>
+          `
+	);
+});
+
+
+	
     	</script>
+
 
 </body>
 </html>

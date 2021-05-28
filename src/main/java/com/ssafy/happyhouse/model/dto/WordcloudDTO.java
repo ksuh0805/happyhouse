@@ -11,7 +11,7 @@ public class WordcloudDTO {
 		this.word = word;
 	}
 	public int getMount() {
-		return mount*5;
+		return mount*7;
 	}
 	public void setMount(int mount) {
 		this.mount = mount;

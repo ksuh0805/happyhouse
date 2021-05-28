@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.ssafy.happyhouse.model.mapper.MessageMapper">
+
+	<insert id="send" parameterType="message">
+		insert into message(
+			sendID, receivingID, title, contents, wdate
+		) values (
+			#{sendID}, #{receivingID}, #{title}, #{contents}, now()
+		)
+	</insert>
+	
+	<select id="selectAllList" resultType="message" parameterType="String">
+		select * 
+		  from message
+		  where ReceivingID = #{userid}
+	</select>
+	
+	<select id="selectDetail" parameterType="int" resultType="Message">
+		select * 
+		  from message
+		 where no = #{no}
+	</select>
+	
+	<delete id="selectDelete" parameterType="int">
+		delete 
+		  from message
+		 where no = #{no} 
+	</delete>
+</mapper>

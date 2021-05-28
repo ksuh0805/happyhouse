@@ -59,7 +59,7 @@ window.onload = function(){
 	                </div>
 	                <div class="form-group">
 	                    <label for="inputPassword">Password:</label>
-	                    <input type="text" class="form-control" id="userpwd" name="userpwd" placeholder="Password">
+	                    <input type="password" class="form-control" id="userpwd" name="userpwd" placeholder="Password">
 	                </div>
 	                </div>
 	

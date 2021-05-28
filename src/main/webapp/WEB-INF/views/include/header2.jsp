@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Agency - Start Bootstrap Theme</title>
+    <title>공공칠방</title>
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
@@ -19,13 +19,24 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="${root}/css/styles.css" rel="stylesheet" />
     <script src="${root}/js/login.js"></script>
+    <script src="${root}/js/mainhref.js"></script>
+    <style>
+    	#logo{
+    		width:150px;
+    		height: 75px;
+    	}
+    	#logomain{
+    		width:400px;
+    		height: 200px;
+    	}
+    </style>
 </head>
 <body>
 <!-- Masthead-->
         <header class="masthead">
             <div class="container">
-                <div class="masthead-subheading">Enjoy Our Service!</div>
-                <div class="masthead-heading text-uppercase">부동산 실거래 검색 페이지</div>
+                <!-- <div class="masthead-subheading">Enjoy Our Service!</div> -->
+                <div class="masthead-heading text-uppercase"><img style="cursor:pointer" id="logomain" src="${root}/img/logo7.png"></div>
                 <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="#services" id="main">서비스 이용하기</a>
             </div>
         </header>
@@ -33,18 +44,18 @@
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
             <div class="container">
                 <!-- <a class="navbar-brand js-scroll-trigger" href="#page-top"><img src="assets/img/navbar-logo.svg" alt="..." /></a> -->
-                <a onclick="location.href='${root}/'"><img src="${root}/img/ssafy_logo.png"></a>
+                <a onclick="location.href='${root}/'" style="cursor:pointer"><img id="logo" src="${root}/img/logo7.png"></a>
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                     Menu
                     <i class="fas fa-bars ml-1"></i>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav text-uppercase ml-auto">
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services" id="service">Services</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#portfolio">Notice</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services" id="mvservice">Services</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#portfolio" id="mvnotice">Notice</a></li>
                         <!-- <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">About</a></li> -->
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact">Live Chat</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#team">Team</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact" id="mvlivechat">Live Chat</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#team" id="mvteam">Team</a></li>
                     	<li class="nav-item"> <%@ include file="/WEB-INF/views/user/login.jsp" %> </li>
                     </ul>
                 </div>

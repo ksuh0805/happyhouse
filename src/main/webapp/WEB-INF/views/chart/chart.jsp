@@ -21,7 +21,11 @@
 <script
 	src="https://rawgit.com/jasondavies/d3-cloud/master/build/d3.layout.cloud.js"
 	type="text/JavaScript"></script>
-<title>Insert title here</title>
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Jua&display=swap" rel="stylesheet">
+<script src="${root}/js/mainhref.js"></script>
+<title>공공칠방</title>
 </head>
 <script>
 $(document).ready(function(){
@@ -105,20 +109,21 @@ $(document).ready(function(){
 
 					var color = d3.scale.linear() //선형적인 스케일로 표준화를 시킨다.
 					.domain([ 0, 1, 2, 3, 4, 5, 6, 8, 10, 20, 100 ])//데이터의 범위, 입력 크기
-					.range([ 0.50 ]);//표시할 범위, 출력 크기[0.50]
+					.range([ "#c71585", "#ba55d3", "#4169e1", "#ff4500" ,"#008b8b", "#6495ed", "#40e0d0", "#ff00ff", "#dc143c", "#a52a2a", "#1e90ff", "#48d1cc", "#777", "#666", "#555", "#444", "#333", "#222"]);//표시할 범위, 출력 크기[0.50]
 					//ex)"#ddd", "#ccc", "#bbb", "#aaa", "#999", "#888", "#777", "#666", "#555", "#444", "#333", "#222"
 
-					d3.layout.cloud().size([ 800, 300 ]) //[width,height] [800, 300]
+					d3.layout.cloud().size([ 600, 300 ]) //[width,height] [800, 300]
 					.words(x).rotate(0).fontSize(function(d) {
 						return d.mount;
 					}).on("end", draw).start();
 
 					function draw(words) {
 						d3.select("#wordcloud").append("svg")//wordcloud 테이블에 svg를 붙이고
-						.attr("width", 850) //850  350
+						.attr("width", 650) //850  350
 						.attr("height", 350).attr("class", "wordcloud").append(
-								"g").attr("transform", "translate(320,200)") //320  200
+								"g").attr("transform", "translate(300, 150)") //320  200
 						.selectAll("text").data(words).enter().append("text")
+								.style("font-family", 'Jua')
 								.style("font-size", function(d) {
 									return d.mount + "px";
 								}).style("fill", function(d, i) {
@@ -149,7 +154,7 @@ $(document).ready(function(){
 						data : {
 							labels : labels,
 							datasets : [ {
-								label : '관심 키워드 Top5',
+								label : '전체 관심 키워드 Top5',
 								data : data,
 								backgroundColor : [ 'rgba(255, 99, 132, 0.2)',
 										'rgba(54, 162, 235, 0.2)',

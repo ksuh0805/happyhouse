@@ -12,7 +12,7 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="description" content="" />
 <meta name="author" content="" />
-<title>Agency - Start Bootstrap Theme</title>
+<title>공공칠방</title>
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 <!-- Font Awesome icons (free version)-->
 <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js"
@@ -26,7 +26,19 @@
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="${root}/css/styles.css" rel="stylesheet" />
 <script src="${root}/js/filtering.js"></script>
+<script src="${root}/js/mainhref.js"></script>
 </head>
+<script>
+$(document).ready(function(){
+	
+	// Handler for .ready() called.
+    $('html, body').animate({
+        scrollTop: $('#contact').offset().top
+    }, 'slow');
+	var no = 1;
+	console.log(eval("no" + no));
+});
+</script>
 <body id="page-top">
 
 	
@@ -39,8 +51,8 @@
 			let today = new Date();
 			console.log(data.data);
 			var words = data.data.toString();
-			if(filter(words)) {
-				alert('사용할 수 없는 단어입니다!');
+			if(filter(words) != "") {
+				alert(filter(words) + '는 사용할 수 없는 단어입니다!');
 				return;
 			}
 			let hours = today.getHours(); // 시
@@ -66,10 +78,12 @@
 	
 	<!-- Contact-->
 	<section class="page-section" id="contact">
-		<div class="container" style="justify-content:center">
+		<div class="container" style="text-align: center;">
 			<div class="text-center">
 				<h2 class="section-heading text-uppercase">실시간 채팅</h2>
 				<h3 class="section-subheading text-muted">실시간으로 부동산 정보를 소통해보세요!</h3>
+				<h5 style="color:white">비속어나 비방 단어는 사용이 제한됩니다</h5>
+				<br>
 			</div>
 			<button class="btn btn-primary" onclick="connectWs()" id="startBtn"> 채팅 시작하기</button>
 			<input id="chatting" placeholder="chat!"></input><button class="btn btn-primary" onclick="send()"> 보내기 </button>

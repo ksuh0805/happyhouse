@@ -10,7 +10,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Agency - Start Bootstrap Theme</title>
+        <title>공공칠방</title>
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
@@ -27,7 +27,7 @@
             <div class="container">
                 <div class="text-center">
                     <h2 class="section-heading text-uppercase">Services</h2>
-                    <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                    <h3 class="section-subheading text-muted">공공칠방의 서비스를 소개합니다!</h3>
                 </div>
                 <div class="row text-center">
                     <div class="col-md-4" onclick="location.href='aptdeal/search'" style="cursor:pointer">
@@ -36,7 +36,7 @@
                             <i class="fas fa-map-marked-alt fa-stack-1x fa-inverse"></i>
                         </span>
                         <h4 class="my-3">부동산 실거래 정보</h4>
-                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                        <p class="text-muted">지역별 / 아파트 이름 별로 <br> 부동산 정보를 검색해보세요!</p>
                     </div>
                     <div class="col-md-4" style="cursor:pointer"
 	                    onclick="location.href='interest/Areaofinterest?userid=${userinfo.userid}'">
@@ -45,9 +45,7 @@
 	                        class="fas fa-heart fa-stack-1x fa-inverse"></i>
 	                    </span>
 	                    <h4 class="my-3">나의 관심지역 살펴보기</h4>
-	                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur
-	                        adipisicing elit. Minima maxime quam architecto quo inventore
-	                        harum ex magni, dicta impedit.</p>
+	                    <p class="text-muted">나의 관심 지역 / 부동산의 <br> 주변 상권을 살펴보세요!</p>
 	                </div>
                     <div class="col-md-4" onclick="location.href='${root}/chart/chart'" style="cursor:pointer">
                         <span class="fa-stack fa-4x">
@@ -55,7 +53,7 @@
                             <i class="fas fa-search-dollar fa-stack-1x fa-inverse"></i>
                         </span>
                         <h4 class="my-3">통계비교 해보기</h4>
-                        <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                        <p class="text-muted">공공칠방의 회원들은 어떤 <br> 지역 / 부동산에 관심이 많을까요?</p>
                     </div>
                 </div>
             </div>
@@ -89,18 +87,18 @@
 							<tbody>
 								<tr style="cursor:pointer" class="table-warning"
 									onclick="location.href='${root}/board/detail?idx=${top.idx}&count=${top.count}'">
-									<td style="width: 20%">인기! <i class="fa fa-fire-alt fa-lg"></i></td>
-									<td style="width: 30%">${top.subject}</td>
-									<td style="width: 30%">${top.wdate}</td>
-									<td style="width: 20%">${top.count}</td>
+									<td style="width: 10%">인기! <i class="fa fa-fire-alt fa-lg"></i></td>
+									<td style="width: 60%">${top.subject}</td>
+									<td style="width: 20%">${top.wdate}</td>
+									<td style="width: 10%">${top.count}</td>
 								</tr>
 								<c:forEach var="board" items="${result.list}" varStatus="loop">
 									<tr style="cursor:pointer"
 										onclick="location.href='${root}/board/detail?idx=${board.idx}&count=${board.count}'">
-										<td style="width: 20%">${board.idx}</td>
-										<td style="width: 30%">${board.subject}</td>
-										<td style="width: 30%">${board.wdate}</td>
-										<td style="width: 20%">${board.count}</td>
+										<td style="width: 10%">${board.idx}</td>
+										<td style="width: 60%">${board.subject}</td>
+										<td style="width: 20%">${board.wdate}</td>
+										<td style="width: 10%">${board.count}</td>
 									</tr>
 								</c:forEach>
 								<c:if test="${empty result.list}">
@@ -176,21 +174,21 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="assets/img/team/1.jpg" alt="..." />
+                            <img style="height:250px" class="mx-auto rounded-circle" src="${root}/img/team1.jpg" alt="..." />
                             <h4>김수현</h4>
                             <p class="text-muted">BE / FE</p>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="team-member">
-                            <img class="mx-auto rounded-circle" src="assets/img/team/2.jpg" alt="..." />
+                            <img style="height:250px"class="mx-auto rounded-circle" src="${root}/img/team2.jpg" alt="..." />
                             <h4>김재민</h4>
                             <p class="text-muted">BE / FE</p>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-8 mx-auto text-center"><p class="large text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p></div>
+                    <div class="col-lg-8 mx-auto text-center"><p class="large text-muted">SSAFY 5기 <br> 대전 4반 7팀 팀원입니다!</p></div>
                 </div>
             </div>
         </section>

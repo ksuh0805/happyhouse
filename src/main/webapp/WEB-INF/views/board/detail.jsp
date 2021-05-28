@@ -10,7 +10,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<title>돈워리 비싸피 하우스</title>
+<script src="${root}/js/mainhref.js"></script>
+<title>공공칠방</title>
 </head>
 <script>
 $(document).ready(function(){
@@ -46,11 +47,13 @@ $(document).ready(function(){
 			<table class="thead-dark table-bordered table-striped" style="width:90%; height:500px; text-align:center; border-radius: 1em;">
 				<tr class="table-dark" style="text-color:black">					
 					<th style="font-weight:bold" colspan='1'>제목</th>
-					<th colspan='6'>${board.subject}</th>
+					<th colspan='7' style="color:black">${board.subject}</th>
 				</tr>
 				<tr>
 					<td style="font-weight:bold">작성자</td>
-					<td colspan="4">관리자</td>
+					<td colspan="2">관리자</td>
+					<td style="font-weight:bold">날짜</td>
+					<td>${board.wdate}</td>
 					<td style="font-weight:bold">조회수</td>
 					<td>${board.count}</td>
 				</tr>

@@ -66,6 +66,5 @@
             interest 
         GROUP BY 
             word 
-        HAVING count(*) >1
 	</select>	
 </mapper>

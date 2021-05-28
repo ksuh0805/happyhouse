@@ -60,6 +60,9 @@ public class BoardController {
 	@RequestMapping("/board/write")
 	public String write(Model model, @ModelAttribute Board board) throws Exception {
 		System.out.println("writeteboard");
+		String str = board.getContent();
+		str = str.replace("\r\n", "<br>");
+		board.setContent(str);
 		boardService.boardInsert(board);
 		return "redirect:/";
 	}
